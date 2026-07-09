@@ -1,11 +1,16 @@
-# Dry Bean Classification with PyTorch & API
+# 🫘 Dry Bean Classification with PyTorch & FastAPI
 
-Bu proje, farklı kuru fasulye türlerini boyut ve şekil özelliklerine göre sınıflandırmak için geliştirilmiş uçtan uca (end-to-end) bir makine öğrenmesi uygulamasıdır. PyTorch ile geliştirilen derin öğrenme modeli, eğitildikten sonra bir API ve Web Arayüzü üzerinden kullanıcıların tahmin yapmasına olanak tanır.
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+
+Bu proje, 7 farklı kuru fasulye türünü (Seker, Barbunya, Bombay, Cali, Dermason, Horoz, Sira) yapısal ve boyutsal özelliklerine göre sınıflandırmak için geliştirilmiş uçtan uca bir makine öğrenmesi uygulamasıdır. PyTorch kullanılarak geliştirilen Derin Öğrenme (Deep Learning) modeli, modern ve hızlı bir web framework'ü olan FastAPI ile birleştirilerek gerçek zamanlı tahmin yapabilen bir API servisine dönüştürülmüştür.
 
 ## 🚀 Özellikler
 
 * **Veri Ön İşleme:** Dry_Bean_Dataset.csv dosyası üzerinden veriler okunmuş, tekrar eden satırlar temizlenmiş ve sayısal veriler `StandardScaler` ile ölçeklendirilmiştir.
 * **Derin Öğrenme Modeli:** PyTorch kullanılarak 16 girişli, 32 nöronlu gizli katmanlara sahip ve 7 çıkışlı tam bağlı (fully connected) bir sinir ağı mimarisi kurulmuştur.
+* **Model Mimarisi:** PyTorch ile 16 giriş özellikli, `ReLU` aktivasyon fonksiyonu kullanan 32 nöronlu iki gizli katmana sahip ve 7 çıkışlı tam bağlı (Fully Connected) bir sinir ağı inşa edilmiştir.
 * **Performans Takibi:** Modelin doğruluğu (accuracy) ve hata oranı (loss) `TorchMetrics` kütüphanesi ile `MulticlassAccuracy` ve `MulticlassConfusionMatrix` kullanılarak değerlendirilmiştir.
 * **API ve Web Arayüzü:** Eğitilen model (`DryBeanClassifier.pth`), tahminleri görselleştirmek için bir web arayüzüne API aracılığıyla bağlanmıştır.
 
