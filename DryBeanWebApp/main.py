@@ -8,7 +8,7 @@ import joblib
 import numpy as np
 import os
 
-# 1. Pydantic Model for Input Validation
+# Pydantic Model for Input Validation
 class BeanFeatures(BaseModel):
     Area: float
     Perimeter: float
