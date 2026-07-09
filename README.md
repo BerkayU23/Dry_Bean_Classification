@@ -30,7 +30,7 @@ Model eğitimi sonucunda elde edilen hata matrisi (Confusion Matrix) proje içer
 Projeyi kendi bilgisayarında çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
 
 1. Depoyu klonlayın:
-   git clone "https://github.com/kullaniciadin/depo-adin.git"
+   git clone 
 
 2. Gerekli kütüphaneleri yükleyin:
    pip install -r "requirements.txt"
