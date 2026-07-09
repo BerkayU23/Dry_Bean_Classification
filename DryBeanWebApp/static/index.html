@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dry Bean Classifier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Dry Bean Classifier</h1>
+            <p>PyTorch tabanlı, yüksek doğruluklu tarımsal sınıflandırma sistemi</p>
+        </header>
+
+        <main>
+            <form id="prediction-form">
+                <div class="form-header">
+                    <h2>Özellikler (Features)</h2>
+                    <button type="button" id="fill-random" class="btn btn-secondary">Rastgele Doldur</button>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="input-group">
+                        <label for="Area">Area</label>
+                        <input type="number" id="Area" name="Area" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Perimeter">Perimeter</label>
+                        <input type="number" id="Perimeter" name="Perimeter" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="MajorAxisLength">MajorAxisLength</label>
+                        <input type="number" id="MajorAxisLength" name="MajorAxisLength" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="MinorAxisLength">MinorAxisLength</label>
+                        <input type="number" id="MinorAxisLength" name="MinorAxisLength" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="AspectRation">AspectRation</label>
+                        <input type="number" id="AspectRation" name="AspectRation" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Eccentricity">Eccentricity</label>
+                        <input type="number" id="Eccentricity" name="Eccentricity" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="ConvexArea">ConvexArea</label>
+                        <input type="number" id="ConvexArea" name="ConvexArea" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="EquivDiameter">EquivDiameter</label>
+                        <input type="number" id="EquivDiameter" name="EquivDiameter" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Extent">Extent</label>
+                        <input type="number" id="Extent" name="Extent" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Solidity">Solidity</label>
+                        <input type="number" id="Solidity" name="Solidity" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="roundness">Roundness</label>
+                        <input type="number" id="roundness" name="roundness" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="Compactness">Compactness</label>
+                        <input type="number" id="Compactness" name="Compactness" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="ShapeFactor1">ShapeFactor1</label>
+                        <input type="number" id="ShapeFactor1" name="ShapeFactor1" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="ShapeFactor2">ShapeFactor2</label>
+                        <input type="number" id="ShapeFactor2" name="ShapeFactor2" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="ShapeFactor3">ShapeFactor3</label>
+                        <input type="number" id="ShapeFactor3" name="ShapeFactor3" step="any" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="ShapeFactor4">ShapeFactor4</label>
+                        <input type="number" id="ShapeFactor4" name="ShapeFactor4" step="any" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="submit-btn" class="btn btn-primary">Tahmin Et</button>
+                </div>
+            </form>
+
+            <div id="result-container" class="result-card hidden">
+                <h3>Tahmin Sonucu</h3>
+                <div class="result-content">
+                    <span id="predicted-class" class="badge">---</span>
+                </div>
+                <div id="probabilities-container" class="probabilities-list">
+                    <!-- Progress bars will be injected here -->
+                </div>
+                <button id="reset-btn" class="btn btn-text">Yeni Tahmin</button>
+            </div>
+            
+            <div id="error-container" class="error-alert hidden">
+                <!-- Error messages will be injected here -->
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
