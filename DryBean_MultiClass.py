@@ -16,6 +16,16 @@ plt.figure(figsize=(8,5))
 sns.histplot(df["Class"])
 plt.show()
 
+df.hist(figsize=(15,10), bins=30)
+
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(15,10))
+sns.heatmap(df.corr(numeric_only=True), annot=True)
+plt.show()
+
+
 X = df.drop("Class", axis = 1).values
 y = df["Class"].values
 
@@ -27,7 +37,7 @@ le = LabelEncoder()
 y = le.fit_transform(y)
 
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=23)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=23, stratify=y)
 
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
@@ -68,6 +78,11 @@ optimizer = torch.optim.Adam(params=model.parameters(), lr = 0.003)
 
 epochs = 501
 
+train_losses = []
+test_losses = []
+train_accuracies = []
+test_accuracies = []
+
 for epoch in range(epochs):
     model.train()
 
@@ -81,6 +96,9 @@ for epoch in range(epochs):
     loss.backward()
     optimizer.step()
 
+    train_losses.append(loss.item())
+    train_accuracies.append(acc)
+
     model.eval()
 
     with torch.inference_mode():
@@ -91,9 +109,29 @@ for epoch in range(epochs):
         test_pred = torch.softmax(test_logits, dim=1).argmax(dim=1)
         test_acc = accuracy(test_pred, y_test).item() * 100
 
+    test_losses.append(test_loss.item())
+    test_accuracies.append(test_acc)
+
     if epoch % 20 == 0:
         print(f"Epoch: {epoch}, Loss: {loss:.5f}, Accuracy: {acc:.3f}, Test Loss: {test_loss:.5f}, Test Accuracy: {test_acc:.3f}")
 
+
+plt.figure(figsize=(10,5))
+plt.subplot(1, 2, 1)
+plt.plot(train_losses, label = "Train Loss")
+plt.plot(test_losses, label = "Test Loss")
+plt.xlabel("Epoch")
+plt.ylabel("Loss")
+plt.title("Train/Test Loss Curve")
+
+plt.subplot(1, 2, 2)
+plt.plot(train_accuracies, label = "Train Accuracy")
+plt.plot(test_accuracies, label = "Test Accuracy")
+plt.xlabel("Epoch")
+plt.ylabel("Accuracy (%)")
+plt.title("Train/Test Accuracy Curve")
+plt.legend()
+plt.show()
 
 from torchmetrics.classification import MulticlassConfusionMatrix
 cm = MulticlassConfusionMatrix(num_classes=7)
@@ -102,14 +140,4 @@ print(matrix)
 
 from torchmetrics.utilities.plot import plot_confusion_matrix
 print(plot_confusion_matrix(matrix))
-
-from pathlib import Path
-
-MODEL_PATH = Path("DryBeanMC")
-MODEL_PATH.mkdir(parents=True, exist_ok=True)
-
-MODEL_NAME = "DryBeanClassifier.pth"
-MODEL_SAVE_PATH = MODEL_PATH / MODEL_NAME
-
-torch.save(obj=model.state_dict(), f=MODEL_SAVE_PATH)
-
+plt.show()
